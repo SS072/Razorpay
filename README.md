@@ -4,12 +4,12 @@
 ### Autonomous Dual-Tier Risk & Syndicate Defense Engine
 **Engineered for Razorpay Buildathon — Track 02: AI Risk Manager**
 
-[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live_Production-00C2D9?style=for-the-badge&logo=vercel&logoColor=white)](https://frontend-blush-xi-ivq3g027kn.vercel.app)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live_Production-00C2D9?style=for-the-badge&logo=vercel&logoColor=white)](https://razorshield-ai.vercel.app)
 [![API Engine](https://img.shields.io/badge/FastAPI-Python_3.11-26D69A?style=for-the-badge&logo=fastapi&logoColor=white)](http://localhost:8000/docs)
 [![License](https://img.shields.io/badge/License-MIT-4C8DFF?style=for-the-badge)](LICENSE)
 [![P99 SLA](https://img.shields.io/badge/P99_Latency-<15ms-A970FF?style=for-the-badge&logo=speedtest&logoColor=white)]()
 
-[🌐 Live Web Dashboard](https://frontend-blush-xi-ivq3g027kn.vercel.app) • [📖 Architecture Spec](#-system-architecture) • [📊 ML Benchmarks](#-reproducible-ml-benchmarks) • [⚡ Quick Start](#-quick-start)
+[🌐 Live Web Dashboard](https://razorshield-ai.vercel.app) • [📖 Architecture Spec](#-system-architecture) • [📊 ML Benchmarks](#-reproducible-ml-benchmarks) • [⚡ Quick Start](#-quick-start)
 
 </div>
 
