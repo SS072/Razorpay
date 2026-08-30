@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────
+   RAZORSHIELD AI — Enterprise Design System
+   "Bloomberg Terminal meets modern fintech SOC"
+   ─────────────────────────────────────────── */
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    background-color: #070B14;
+    color: #E8EDF7;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Monospace for data/telemetry elements */
+  .font-mono, code, kbd, pre {
+    font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', ui-monospace, monospace;
+  }
+}
+
+/* ── Ambient Background Mesh ── */
+.bg-soc-mesh {
+  background-color: #070B14;
+  background-image:
+    radial-gradient(ellipse at 0% 0%, rgba(76, 141, 255, 0.06) 0, transparent 42%),
+    radial-gradient(ellipse at 100% 0%, rgba(169, 112, 255, 0.05) 0, transparent 42%),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 194, 217, 0.04) 0, transparent 50%);
+}
+
+/* ── Surface Cards ── */
+.soc-card {
+  background: linear-gradient(160deg, #111927 0%, #0D1322 100%);
+  border: 1px solid #1D2940;
+  box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+/* Top accent lines — use only where semantically meaningful */
+.soc-card-glow     { border-top: 1.5px solid rgba(76, 141, 255, 0.30); }
+.soc-card-cyan-glow { border-top: 1.5px solid rgba(0, 194, 217, 0.30); }
+.soc-card-danger-glow { border-top: 1.5px solid rgba(255, 77, 109, 0.30); }
+
+/* ── Subtle Text Glows (use sparingly — only hero metrics) ── */
+.glow-text-red   { text-shadow: 0 0 18px rgba(255, 77, 109, 0.35); }
+.glow-text-green { text-shadow: 0 0 18px rgba(38, 214, 154, 0.35); }
+.glow-text-cyan  { text-shadow: 0 0 18px rgba(0, 194, 217, 0.35); }
+
+/* ── Scrollbars (minimal, non-intrusive) ── */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1D2940; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #2B3C5E; }
+
+/* ── Subtle Ping Animations — ONLY for status indicators ── */
+@keyframes ping-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-ping-subtle { animation: ping-subtle 2s ease-in-out infinite; }
+
+/* ── Drawer & Modal Slide Transitions ── */
+@keyframes slide-in-from-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-in { animation-fill-mode: both; animation-duration: 200ms; }
+.slide-in-from-right { animation-name: slide-in-from-right; }
+.fade-in { animation-name: fade-in; }
+
+/* ── Hide scrollbar for nav overflow ── */
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ── Active button scale ── */
+.active\:scale-98:active { transform: scale(0.98); }

@@ -1,0 +1,32 @@
+# Python backend
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.egg-info/
+backend/dist/
+backend/.env
+*.env
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.cache/
+
+# OS & Editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test outputs
+backend/test_output.txt
