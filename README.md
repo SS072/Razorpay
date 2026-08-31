@@ -231,7 +231,7 @@ npm run dev
 
 <div align="center">
 
-**Built for the Razorpay Buildathon (Track 02: AI Risk Manager)**
+**Built for the Razorpay Buildathon**
 *Engineered by Saima*
 
 </div>
