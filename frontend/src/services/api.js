@@ -274,11 +274,26 @@ export async function toggleRuleStatus(ruleId, status) {
   }
 }
 
-// Active Simulation Injector
+// Active Simulation Injector & Global Subscriber Dispatcher
 let activeSimulatorScenario = 'NORMAL';
+let activeTransactionListener = null;
 
-export async function triggerSimulation(scenario, count = 25) {
+export async function triggerSimulation(scenario, count = 20) {
   activeSimulatorScenario = scenario;
+
+  // If running in client mode (or offline fallback), immediately dispatch an attack burst!
+  if (activeTransactionListener) {
+    const burstCount = Math.min(count, 12);
+    for (let i = 0; i < burstCount; i++) {
+      setTimeout(() => {
+        if (activeTransactionListener) {
+          const attackTx = generateMockTransaction(scenario);
+          activeTransactionListener(attackTx);
+        }
+      }, i * 220);
+    }
+  }
+
   try {
     const res = await fetch(`${API_BASE}/simulation/start`, {
       method: 'POST',
@@ -297,6 +312,7 @@ export function subscribeToTransactions(onTransaction, onInitialSnapshot, onRepo
   let isClosed = false;
   let eventSource = null;
   let fallbackInterval = null;
+  activeTransactionListener = onTransaction;
 
   function startClientBroadcaster() {
     // 1. Immediately emit 50 pre-seeded bootstrap transactions
@@ -358,6 +374,7 @@ export function subscribeToTransactions(onTransaction, onInitialSnapshot, onRepo
 
   return () => {
     isClosed = true;
+    activeTransactionListener = null;
     if (eventSource) eventSource.close();
     if (fallbackInterval) clearInterval(fallbackInterval);
   };

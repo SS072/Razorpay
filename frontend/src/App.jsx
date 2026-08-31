@@ -53,7 +53,28 @@ export default function App() {
   });
   const [transactions, setTransactions] = useState([]);
   const [firewallRules, setFirewallRules] = useState([]);
-  const [latestReport, setLatestReport] = useState(null);
+  const [latestReport, setLatestReport] = useState({
+    case_id: 'CASE-FORENSIC-MULE-001',
+    target_entity: 'vpa:mule_aggregate@okhdfcbank',
+    investigation_status: 'COMPLETED',
+    timestamp: new Date().toISOString(),
+    threat_level: 'CRITICAL',
+    threat_category: 'MULE_SYNDICATE_RING',
+    findings_narrative: "Entity mule_aggregate@okhdfcbank was identified as the central aggregation hub of a high-dispersion mule syndicate. The Tier-2 bipartite graph engine detected 12 linked accounts across 8 merchants utilizing a shared device fingerprint (dev_mule_cluster_77) and proxy IP subnet range (103.21.244.0/24). Transaction velocities exceeded baseline thresholds by 340%.",
+    evidence_summary: {
+      linked_accounts: 12,
+      shared_devices: 4,
+      ip_clusters: 3,
+      total_volume_inr: 842000,
+      behavioral_similarity_pct: 87.4
+    },
+    recommended_dsl_rule: "RULE-FW-MULE-002: HARD_BLOCK WHEN upi_vpa == 'mule_aggregate@okhdfcbank' OR device_fingerprint == 'dev_mule_cluster_77'",
+    rbi_compliance_summary: {
+      master_direction_clause: 'Section 4: Digital Payment Fraud Risk Management',
+      reporting_status: 'READY_FOR_FILING',
+      audit_trail_id: 'RBI-AUDIT-2026-0831-MULE'
+    }
+  });
 
   // ─── Feed Control State ───────────────────────────────────────
   const [filter, setFilter] = useState('ALL');
