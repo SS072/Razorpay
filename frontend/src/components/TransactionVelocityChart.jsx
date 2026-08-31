@@ -5,21 +5,38 @@ import {
 } from 'recharts';
 import { Activity, Radio, Zap } from 'lucide-react';
 
+function getInitialVelocityData() {
+  const data = [];
+  const now = new Date();
+  const basePoints = [
+    { normal: 180, attack: 4, challenge: 12 },
+    { normal: 195, attack: 6, challenge: 14 },
+    { normal: 210, attack: 5, challenge: 11 },
+    { normal: 205, attack: 9, challenge: 18 },
+    { normal: 220, attack: 42, challenge: 34 },
+    { normal: 215, attack: 88, challenge: 29 },
+    { normal: 190, attack: 64, challenge: 25 },
+    { normal: 230, attack: 28, challenge: 16 },
+    { normal: 245, attack: 12, challenge: 15 },
+    { normal: 240, attack: 8, challenge: 14 },
+    { normal: 260, attack: 14, challenge: 19 },
+    { normal: 275, attack: 38, challenge: 24 }
+  ];
+
+  for (let i = 11; i >= 0; i--) {
+    const d = new Date(now.getTime() - i * 5 * 60 * 1000);
+    const timeStr = `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
+    const idx = 11 - i;
+    data.push({
+      time: timeStr,
+      ...basePoints[idx]
+    });
+  }
+  return data;
+}
+
 export default function TransactionVelocityChart({ liveActivityTrigger }) {
-  const [data, setData] = useState([
-    { time: '10:55', normal: 180, attack: 4, challenge: 12 },
-    { time: '11:00', normal: 195, attack: 6, challenge: 14 },
-    { time: '11:05', normal: 210, attack: 5, challenge: 11 },
-    { time: '11:10', normal: 205, attack: 9, challenge: 18 },
-    { time: '11:15', normal: 220, attack: 42, challenge: 34 },
-    { time: '11:20', normal: 215, attack: 88, challenge: 29 },
-    { time: '11:25', normal: 190, attack: 64, challenge: 25 },
-    { time: '11:30', normal: 230, attack: 28, challenge: 16 },
-    { time: '11:35', normal: 245, attack: 12, challenge: 15 },
-    { time: '11:40', normal: 240, attack: 8, challenge: 14 },
-    { time: '11:45', normal: 260, attack: 14, challenge: 19 },
-    { time: '11:50', normal: 275, attack: 38, challenge: 24 }
-  ]);
+  const [data, setData] = useState(() => getInitialVelocityData());
 
   useEffect(() => {
     const interval = setInterval(() => {

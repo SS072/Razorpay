@@ -9,16 +9,37 @@ import {
   Tooltip, CartesianGrid, Legend, Cell, PieChart, Pie 
 } from 'recharts';
 
-export default function RiskIntelligencePage({ stats = {}, onOpenDossier }) {
-  const financialData = [
-    { period: 'Mon', prevented: 2.8, fpCost: 0.02 },
-    { period: 'Tue', prevented: 3.4, fpCost: 0.03 },
-    { period: 'Wed', prevented: 2.9, fpCost: 0.02 },
-    { period: 'Thu', prevented: 4.1, fpCost: 0.04 },
-    { period: 'Fri', prevented: 3.8, fpCost: 0.03 },
-    { period: 'Sat', prevented: 5.2, fpCost: 0.05 },
-    { period: 'Sun (Today)', prevented: 6.4, fpCost: 0.04 }
+function getRolling7Days() {
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const result = [];
+  const baseMetrics = [
+    { prevented: 2.8, fpCost: 0.02 },
+    { prevented: 3.4, fpCost: 0.03 },
+    { prevented: 2.9, fpCost: 0.02 },
+    { prevented: 4.1, fpCost: 0.04 },
+    { prevented: 3.8, fpCost: 0.03 },
+    { prevented: 5.2, fpCost: 0.05 },
+    { prevented: 6.4, fpCost: 0.04 }
   ];
+
+  const now = new Date();
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(now.getDate() - i);
+    const dayName = days[d.getDay()];
+    const label = i === 0 ? `${dayName} (Today)` : dayName;
+    const idx = 6 - i;
+    result.push({
+      period: label,
+      prevented: baseMetrics[idx].prevented,
+      fpCost: baseMetrics[idx].fpCost
+    });
+  }
+  return result;
+}
+
+export default function RiskIntelligencePage({ stats = {}, onOpenDossier }) {
+  const financialData = React.useMemo(() => getRolling7Days(), []);
 
   const categoryBreakdown = [
     { category: 'Mule Ring Aggregation', preventedINR: 980000, pct: '50.8%', color: '#A970FF' },
